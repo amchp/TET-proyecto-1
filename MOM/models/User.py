@@ -1,4 +1,4 @@
-import uuid
+import uuid, hashlib
 from models.persistence.DatabaseInterface import Types
 from models.persistence.Database import FileDatabase
 
@@ -11,7 +11,7 @@ class User:
         else:
             self.ID = id
         self.name = name
-        self.password = password
+        self.password = password #hashlib.sha256(password.encode('ascii')).hexdigest()
         User.users[self.ID] = self
 
     def update(self, name: str, password: str) -> None:
