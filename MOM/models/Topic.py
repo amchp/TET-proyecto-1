@@ -6,6 +6,7 @@ from models.persistence.Database import FileDatabase
 
 
 class Topic:
+    topics = {}
     def __init__(
             self,
             name: str,
@@ -14,19 +15,22 @@ class Topic:
             id: str = None
     ) -> None:
         if id is None:
-            self.ID = uuid.uuid3(uuid.NAMESPACE_OID, f'{name} {creator_id}')
+            self.ID = str(uuid.uuid3(
+                uuid.NAMESPACE_OID, f'{name} {creator_id}')
+            )
         else:
             self.ID = id
         self.name = name
         self.creator_id = creator_id
         self.queues = queues
+        Topic.topics[self.ID] = self
 
     def update(self, name: str, creator_id: str) -> None:
         self.name = name
         self.creator_id = creator_id
 
-    def addQueue(self, queue: Queue) -> None:
-        self.queues.append(queue)
+    def addQueue(self, queue_id: str) -> None:
+        self.queues.append(queue_id)
 
     @staticmethod
     def updateTopics(topics) -> None:
@@ -34,18 +38,17 @@ class Topic:
         pass
 
     @staticmethod
-    def read() -> dict:
-        final_topics = {}
-        topics = FileDatabase.read(Types.queue)
+    def read() -> None:
+        Topic.topics = {}
+        topics = FileDatabase.read(Types.topic)
         for _, topic in topics.items():
-            final_topics[topic['ID']] = Queue(
+            Topic.topics[topic['ID']] = Queue(
                 topic['name'],
                 topic['creator_id'],
-                topic['messages'],
+                topic['queues'],
                 topic['ID']
             )
-        return final_topics
 
     @staticmethod
-    def write(topics) -> None:
-        FileDatabase.write(Types.topic, topics)
+    def write() -> None:
+        FileDatabase.write(Types.topic, Topic.topics)

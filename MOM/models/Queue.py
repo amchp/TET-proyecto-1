@@ -6,6 +6,7 @@ from models.User import User
 
 
 class Queue:
+    queues = {}
     def __init__(
         self,
         creator_id: str,
@@ -23,6 +24,7 @@ class Queue:
         self.creator_id = creator_id
         self.receptor_id = receptor_id
         self.messages = messages
+        Queue.queues[self.ID] = self
 
     def update(self, creator_id: str, receptor_id: str) -> None:
         self.creator_id = creator_id
@@ -45,25 +47,24 @@ class Queue:
         pass
 
     @staticmethod
-    def updateQueues(queues: dict) -> None:
+    def updateQueues() -> None:
         # TODO grab a leader update and update queues
         pass
 
     @staticmethod
-    def read() -> dict:
-        final_queues = {}
+    def read() -> None:
+        Queue.queues = {}
         queues = FileDatabase.read(Types.queue)
         for _, queue in queues.items():
-            final_queues[queue['ID']] = Queue(
+            Queue.queues[queue['ID']] = Queue(
                 queue['creator_id'],
                 queue['receptor_id'],
                 deque(queue['messages']),
                 queue['ID']
             )
-        return final_queues
 
     @staticmethod
-    def write(queues: dict) -> None:
-        for id, queue in queues.items():
+    def write() -> None:
+        for id, queue in Queue.queues.items():
             queue.messages = list(queue.messages)
-        FileDatabase.write(Types.queue, queues)
+        FileDatabase.write(Types.queue, Queue.queues)

@@ -4,6 +4,7 @@ from models.persistence.Database import FileDatabase
 
 
 class User:
+    users = {}
     def __init__(self, name: str, password: str, id: str = None) -> None:
         if id is None:
             self.ID = str(uuid.uuid3(uuid.NAMESPACE_OID, name))
@@ -11,6 +12,7 @@ class User:
             self.ID = id
         self.name = name
         self.password = password
+        User.users[self.ID] = self
 
     def update(self, name: str, password: str) -> None:
         self.name = name
@@ -22,17 +24,16 @@ class User:
         pass
 
     @staticmethod
-    def read() -> dict:
-        final_users = {}
+    def read() -> None:
+        User.users = {}
         users = FileDatabase.read(Types.user)
         for _, user in users.items():
-            final_users[user['ID']] = User(
+            User.users[user['ID']] = User(
                 user['name'],
                 user['password'],
                 user['ID']
             )
-        return final_users
 
     @staticmethod
-    def write(users) -> None:
-        FileDatabase.write(Types.user, users)
+    def write() -> None:
+        FileDatabase.write(Types.user, User.users)
