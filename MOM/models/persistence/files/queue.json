@@ -1,0 +1,24 @@
+{
+    "5008f99e-dbc7-3d08-92ad-220c7334d782": {
+        "ID": "5008f99e-dbc7-3d08-92ad-220c7334d782",
+        "creator_id": "46d647c1-1484-3165-8936-9ead0d9f8bcf",
+        "messages": [
+            "HI",
+            "BYE",
+            "Cool",
+            "LOL"
+        ],
+        "receptor_id": "b63c99a7-05c4-3042-97e4-3d75f3891214"
+    },
+    "bf8741a7-a30c-3c9b-93c9-eb8f5bcde243": {
+        "ID": "bf8741a7-a30c-3c9b-93c9-eb8f5bcde243",
+        "creator_id": "b63c99a7-05c4-3042-97e4-3d75f3891214",
+        "messages": [
+            "HI",
+            "BYE",
+            "Cool",
+            "LOL"
+        ],
+        "receptor_id": "46d647c1-1484-3165-8936-9ead0d9f8bcf"
+    }
+}
