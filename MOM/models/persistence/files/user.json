@@ -2,11 +2,24 @@
     "46d647c1-1484-3165-8936-9ead0d9f8bcf": {
         "ID": "46d647c1-1484-3165-8936-9ead0d9f8bcf",
         "name": "Elisa Rodriguez",
-        "password": "password"
+        "password": "password",
+        "queues": {
+            "bf8741a7-a30c-3c9b-93c9-eb8f5bcde243": "bf8741a7-a30c-3c9b-93c9-eb8f5bcde243"
+        }
     },
     "b63c99a7-05c4-3042-97e4-3d75f3891214": {
         "ID": "b63c99a7-05c4-3042-97e4-3d75f3891214",
         "name": "Alejandro Mc Ewen",
-        "password": "password"
+        "password": "password",
+        "queues": {
+            "4e771ff8-5af5-3219-8c19-83ef9e0c0849": "4e771ff8-5af5-3219-8c19-83ef9e0c0849",
+            "5008f99e-dbc7-3d08-92ad-220c7334d782": "5008f99e-dbc7-3d08-92ad-220c7334d782"
+        }
+    },
+    "c272a8bd-ce0b-38f1-98a6-3c1347c7b95d": {
+        "ID": "c272a8bd-ce0b-38f1-98a6-3c1347c7b95d",
+        "name": "Juanma",
+        "password": "password",
+        "queues": {}
     }
 }

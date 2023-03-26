@@ -1,10 +1,17 @@
 {
+    "4e771ff8-5af5-3219-8c19-83ef9e0c0849": {
+        "ID": "4e771ff8-5af5-3219-8c19-83ef9e0c0849",
+        "creator_id": "c272a8bd-ce0b-38f1-98a6-3c1347c7b95d",
+        "messages": [
+            "AWSOME",
+            "LAST"
+        ],
+        "receptor_id": "b63c99a7-05c4-3042-97e4-3d75f3891214"
+    },
     "5008f99e-dbc7-3d08-92ad-220c7334d782": {
         "ID": "5008f99e-dbc7-3d08-92ad-220c7334d782",
         "creator_id": "46d647c1-1484-3165-8936-9ead0d9f8bcf",
         "messages": [
-            "HI",
-            "BYE",
             "Cool",
             "LOL"
         ],
@@ -15,9 +22,7 @@
         "creator_id": "b63c99a7-05c4-3042-97e4-3d75f3891214",
         "messages": [
             "HI",
-            "BYE",
-            "Cool",
-            "LOL"
+            "BYE"
         ],
         "receptor_id": "46d647c1-1484-3165-8936-9ead0d9f8bcf"
     }

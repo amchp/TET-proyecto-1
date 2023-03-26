@@ -1,7 +1,6 @@
 import uuid
-from models.persistence.DatabaseInterface import Types
 from models.Queue import Queue
-from models.User import User
+from models.persistence.DatabaseInterface import Types
 from models.persistence.Database import FileDatabase
 
 
@@ -10,42 +9,75 @@ class Topic:
     def __init__(
             self,
             name: str,
-            creator_id: str,
-            queues: list = [],
+            queues: dict = None,
+            subscribers: dict = None,
             id: str = None
     ) -> None:
         if id is None:
             self.ID = str(uuid.uuid3(
-                uuid.NAMESPACE_OID, f'{name} {creator_id}')
+                uuid.NAMESPACE_OID, f'{name}')
             )
+            if self.ID in Topic.topics:
+                raise Exception('Topic already exist')
         else:
             self.ID = id
         self.name = name
-        self.creator_id = creator_id
-        self.queues = queues
+        if queues is None:
+            self.queues = {}
+        else:
+            self.queues = queues
+        if subscribers is None:
+            self.subscribers = {}
+        else:
+            self.subscribers = subscribers
         Topic.topics[self.ID] = self
 
-    def update(self, name: str, creator_id: str) -> None:
-        self.name = name
-        self.creator_id = creator_id
-
     def addQueue(self, queue_id: str) -> None:
-        self.queues.append(queue_id)
+        self.queues[queue_id] = queue_id
+
+    def deleteQueue(self, queue_id: str):
+        del self.queues[queue_id]
+
+    def createQueuesForSubscribers(self, creator_id):
+        for receptor_id in self.subscribers.keys():
+            queue = Queue.findOrCreate(creator_id, receptor_id)
+            self.addQueue(queue.ID)
+
+    def addMessage(self, creator_id, message):
+        self.createQueuesForSubscribers(creator_id)
+        for queue_id in self.queues.keys():
+            Queue.queues[queue_id].addMessage(message)
+
+    def addSubscriber(self, user_id: str) -> None:
+        self.subscribers[user_id] = user_id
+
+    def deleteSubscriber(self, user_id: str):
+        del self.subscribers[user_id]
+
+    def delete(self):
+        del Topic.topics[self.ID]
+        del self
 
     @staticmethod
-    def updateTopics(topics) -> None:
-        # TODO grab a leader update and update topics
-        pass
+    def list():
+        return Topic.topics.values()
+
+    @staticmethod
+    def find(name: str):
+        Topic.topics[str(uuid.uuid3(
+            uuid.NAMESPACE_OID,
+            f'{name}'
+        ))]
 
     @staticmethod
     def read() -> None:
         Topic.topics = {}
         topics = FileDatabase.read(Types.topic)
         for _, topic in topics.items():
-            Topic.topics[topic['ID']] = Queue(
+            Topic.topics[topic['ID']] = Topic(
                 topic['name'],
-                topic['creator_id'],
                 topic['queues'],
+                topic['subscribers'],
                 topic['ID']
             )
 
