@@ -22,7 +22,9 @@
         "creator_id": "b63c99a7-05c4-3042-97e4-3d75f3891214",
         "messages": [
             "HI",
-            "BYE"
+            "BYE",
+            "HI AGAIN",
+            "HI AGAIN2"
         ],
         "receptor_id": "46d647c1-1484-3165-8936-9ead0d9f8bcf"
     }
