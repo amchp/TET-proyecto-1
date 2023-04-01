@@ -38,4 +38,7 @@ def auth(f):
                 response.status = 401
                 return {'error': 'Unauthorized',
                         'error_message': 'Wrong credentials'}
+        response.status = 401
+        return {'success': 0,
+            'message': 'User not found'}
     return inner
