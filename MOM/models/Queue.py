@@ -38,10 +38,17 @@ class Queue:
         messages = self.messages.copy()
         self.messages.clear()
         return messages
-    
+
     def delete(self):
         del Queue.queues[self.ID]
         del self
+
+    @staticmethod
+    def attributesToId(creator_id: str, receptor_id: str,):
+        return str(uuid.uuid3(
+            uuid.NAMESPACE_OID,
+            f'{creator_id} {receptor_id}'
+        ))
 
     @staticmethod
     def list():

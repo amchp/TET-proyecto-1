@@ -6,6 +6,7 @@ from models.persistence.Database import FileDatabase
 
 class Topic:
     topics = {}
+
     def __init__(
             self,
             name: str,
@@ -57,6 +58,10 @@ class Topic:
     def delete(self):
         del Topic.topics[self.ID]
         del self
+
+    @staticmethod
+    def attributesToId(name: str):
+        return str(uuid.uuid3(uuid.NAMESPACE_OID, name))
 
     @staticmethod
     def list():
