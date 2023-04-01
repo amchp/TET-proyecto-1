@@ -7,7 +7,6 @@ from controllers.Middleware import has_body, body_req, auth
 
 @post('/Topic/send', apply=(has_body, body_req({'username', 'password', 'topic', 'message'}), auth))
 def sendToTopic():
-    User.read()
     Topic.read()
     Queue.read()
     payload = json.load(request.body)
@@ -34,7 +33,6 @@ def sendToTopic():
 
 @post('/Topic/subscribe', apply=(has_body, body_req({'username', 'password', 'topic'}), auth))
 def subscribeToTopic():
-    User.read()
     Topic.read()
     payload = json.load(request.body)
     username = payload['username']
@@ -59,7 +57,6 @@ def subscribeToTopic():
 
 @post('/Topic/unsubscribe', apply=(has_body, body_req({'username', 'password', 'topic'}), auth))
 def unsubscribeFromTopic():
-    User.read()
     Topic.read()
     payload = json.load(request.body)
     username = payload['username']
@@ -73,7 +70,7 @@ def unsubscribeFromTopic():
         topic.deleteSubscriber(user_id)
         Topic.write()
         return {'success': 1,
-                'message': 'Successfully subscribed to Topic'}
+                'message': 'Successfully unsubscribed from Topic'}
     except KeyError:
         return {'success': 0,
                 'message': 'Topic not found'}

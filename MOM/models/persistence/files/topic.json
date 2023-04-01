@@ -5,8 +5,6 @@
         "queues": {
             "bf8741a7-a30c-3c9b-93c9-eb8f5bcde243": "bf8741a7-a30c-3c9b-93c9-eb8f5bcde243"
         },
-        "subscribers": {
-            "b63c99a7-05c4-3042-97e4-3d75f3891214": "b63c99a7-05c4-3042-97e4-3d75f3891214"
-        }
+        "subscribers": {}
     }
 }
