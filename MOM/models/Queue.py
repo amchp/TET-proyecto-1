@@ -1,7 +1,7 @@
 import uuid
 from models.persistence.Database import FileDatabase
 from models.persistence.DatabaseInterface import Types
-from exceptions.exceptions import DuplicatedQueueException
+from util.exceptions import DuplicatedQueueException
 
 class Queue:
     queues = {}

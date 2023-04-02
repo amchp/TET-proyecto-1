@@ -20,8 +20,6 @@
         "ID": "c272a8bd-ce0b-38f1-98a6-3c1347c7b95d",
         "name": "Juanma",
         "password": "password",
-        "queues": {
-            "b8ccc8ce-064a-3cd5-8dab-c7b8fb5aaa83": "b8ccc8ce-064a-3cd5-8dab-c7b8fb5aaa83"
-        }
+        "queues": {}
     }
 }
