@@ -3,7 +3,7 @@ import hashlib
 from models.Queue import Queue
 from models.persistence.DatabaseInterface import Types
 from models.persistence.Database import FileDatabase
-
+from util.exceptions import DuplicatedUserException
 
 class User:
     users = dict()
@@ -12,7 +12,7 @@ class User:
         if id is None:
             self.ID = str(uuid.uuid3(uuid.NAMESPACE_OID, name))
             if self.ID in User.users:
-                raise Exception('User already exist')
+                raise DuplicatedUserException('User already exist')
         else:
             self.ID = id
         self.name = name

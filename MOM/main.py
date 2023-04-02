@@ -1,4 +1,4 @@
-from controllers import QueueController, TopicController
+from controllers import QueueController, TopicController, UserController
 from bottle import run
 
 if __name__ == '__main__':
