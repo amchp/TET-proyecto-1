@@ -1,0 +1,10 @@
+services:
+  mom:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./models/persistence
+    ports:
+      - "5672:5672"
+      - "5050:5050"
