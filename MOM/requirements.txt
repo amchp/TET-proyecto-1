@@ -1,2 +1,5 @@
 bottle==0.12.25
+grpcio==1.53.0
+grpcio-tools==1.53.0
+protobuf==4.22.1
 uuid==1.30

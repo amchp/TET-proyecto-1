@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service ReplicationService {
+    rpc replicate(Json) returns (ReplicateResponse) {}
+}
+
+message Json {
+    string filename = 1;
+    bytes data      = 2;
+}
+
+message ReplicateResponse {
+    bool is_successful  = 1;
+    string message      = 2;
+}

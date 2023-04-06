@@ -1,7 +1,7 @@
 import uuid
 from models.persistence.Database import FileDatabase
 from models.persistence.DatabaseInterface import Types
-
+from util.exceptions import DuplicatedQueueException
 
 class Queue:
     queues = {}
@@ -19,7 +19,7 @@ class Queue:
                 f'{creator_id} {receptor_id}'
             ))
             if self.ID in Queue.queues:
-                raise Exception('Queue already exist')
+                raise DuplicatedQueueException('Queue already exist')
         else:
             self.ID = id
         self.creator_id = creator_id
