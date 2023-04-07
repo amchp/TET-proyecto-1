@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import generated.replication.Replication_pb2 as Replication__pb2
+import grpcmodule.generated.replication.Replication_pb2 as Replication__pb2
 
 
 class ReplicationServiceStub(object):

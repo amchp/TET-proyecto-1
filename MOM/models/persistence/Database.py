@@ -1,6 +1,7 @@
 import json
 from models.persistence.DatabaseInterface import Types
 from config import BASE_DIR
+from grpcmodule.GRPCClient import replicate
 
 
 class FileDatabase():
@@ -18,11 +19,15 @@ class FileDatabase():
         return items
 
     @staticmethod
-    def write(type, items) -> None:
+    def write(type, items) -> None:       
         with open(f'{BASE_DIR}/models/persistence/files/{FileDatabase.file_names[type]}', 'w') as file:
+            # store data into the disk
             file.write(json.dumps(
                 items,
                 default=lambda o: o.__dict__,
                 sort_keys=True,
                 indent=4
             ))
+            
+            # replicate data to other MOM instances
+            replicate(FileDatabase.file_names[type])
