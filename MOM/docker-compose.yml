@@ -6,5 +6,5 @@ services:
     volumes:
       - ./models/persistence
     ports:
-      - "5672:5672"
-      - "5050:5050"
+      - "80:80"
+      - "8081:8081"
