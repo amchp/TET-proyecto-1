@@ -1,16 +1,13 @@
-from generated.replication import Replication_pb2, Replication_pb2_grpc
+from config import BASE_DIR
+from grpcmodule.generated.replication import Replication_pb2, Replication_pb2_grpc
 from google.protobuf.json_format import MessageToDict
-from dotenv import load_dotenv, dotenv_values
 import json, base64
 
 
 class ReplicationService(Replication_pb2_grpc.ReplicationServiceServicer):
     def __init__(self) -> None:
         super().__init__()
-        
-        load_dotenv()
-        env = dotenv_values("../.env")
-        self._MOMInstances = eval(env["MOM_INSTANCES"])
+
 
     def replicate(self, request, context):
         try:
@@ -25,7 +22,7 @@ class ReplicationService(Replication_pb2_grpc.ReplicationServiceServicer):
             data = json.dumps(data, indent=4)
 
             # Save the file
-            with open("../models/persistence/files/" + filename, "w") as f:
+            with open(f'{BASE_DIR}/models/persistence/files/{filename}', "w") as f:
                 f.write(data)
             
         except Exception as e:
