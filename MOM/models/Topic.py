@@ -2,10 +2,12 @@ import uuid
 from models.Queue import Queue
 from models.persistence.DatabaseInterface import Types
 from models.persistence.Database import FileDatabase
+from threading import Lock
 
 
 class Topic:
     topics = {}
+    lock = Lock()
 
     def __init__(
             self,

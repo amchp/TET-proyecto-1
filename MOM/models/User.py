@@ -4,9 +4,11 @@ from models.Queue import Queue
 from models.persistence.DatabaseInterface import Types
 from models.persistence.Database import FileDatabase
 from util.exceptions import DuplicatedUserException
+from threading import Lock
 
 class User:
     users = dict()
+    lock = Lock()
 
     def __init__(self, name: str, password: str, id: str = None, queues: dict = None) -> None:
         if id is None:

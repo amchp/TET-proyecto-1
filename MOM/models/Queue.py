@@ -2,9 +2,11 @@ import uuid
 from models.persistence.Database import FileDatabase
 from models.persistence.DatabaseInterface import Types
 from util.exceptions import DuplicatedQueueException
+from threading import Lock
 
 class Queue:
     queues = {}
+    lock = Lock()
 
     def __init__(
         self,
