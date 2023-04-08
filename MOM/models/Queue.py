@@ -26,7 +26,6 @@ class Queue:
             self.ID = id
         self.creator_id = creator_id
         self.receptor_id = receptor_id
-        # TODO Auto add user problem with circular imports
         if messages is None:
             self.messages = []
         else:
@@ -87,4 +86,5 @@ class Queue:
 
     @staticmethod
     def write() -> None:
-        FileDatabase.write(Types.queue, Queue.queues)
+        with Queue.lock:
+            FileDatabase.write(Types.queue, Queue.queues)

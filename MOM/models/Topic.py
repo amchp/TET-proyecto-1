@@ -90,4 +90,5 @@ class Topic:
 
     @staticmethod
     def write() -> None:
-        FileDatabase.write(Types.topic, Topic.topics)
+        with Topic.lock:
+            FileDatabase.write(Types.topic, Topic.topics)

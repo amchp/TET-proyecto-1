@@ -71,4 +71,5 @@ class User:
 
     @staticmethod
     def write() -> None:
-        FileDatabase.write(Types.user, User.users)
+        with User.lock:
+            FileDatabase.write(Types.user, User.users)
