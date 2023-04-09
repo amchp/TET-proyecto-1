@@ -28,6 +28,7 @@ class User:
 
     def addQueue(self, queue_id: str) -> None:
         self.queues[queue_id] = queue_id
+        User.users[self.ID] = self
 
     def deleteQueue(self, queue_id) -> None:
         del self.queues[queue_id]
@@ -36,6 +37,7 @@ class User:
         messages = []
         for queue_id in self.queues.keys():
             messages += Queue.queues[queue_id].sendMessages()
+        User.users[self.ID] = self
         return messages
 
     def delete(self):

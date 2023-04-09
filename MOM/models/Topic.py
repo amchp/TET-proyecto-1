@@ -37,6 +37,7 @@ class Topic:
 
     def addQueue(self, queue_id: str) -> None:
         self.queues[queue_id] = queue_id
+        Topic.topics[self.ID] = self
 
     def deleteQueue(self, queue_id: str):
         del self.queues[queue_id]
@@ -45,14 +46,17 @@ class Topic:
         for receptor_id in self.subscribers.keys():
             queue = Queue.findOrCreate(creator_id, receptor_id)
             self.addQueue(queue.ID)
+        Topic.topics[self.ID] = self
 
     def addMessage(self, creator_id, message):
         self.createQueuesForSubscribers(creator_id)
         for queue_id in self.queues.keys():
             Queue.queues[queue_id].addMessage(message)
+        Topic.topics[self.ID] = self
 
     def addSubscriber(self, user_id: str) -> None:
         self.subscribers[user_id] = user_id
+        Topic.topics[self.ID] = self
 
     def deleteSubscriber(self, user_id: str):
         del self.subscribers[user_id]
