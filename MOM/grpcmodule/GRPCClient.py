@@ -31,11 +31,40 @@ def update():
     # Getting the MOM instance with the highest log file
     max_log = log()
     
-    if max_log[1] is None:
+    count    = max_log[0]
+    instance = max_log[1]
+    
+    filename = f'{BASE_DIR}/models/persistence/files/log.json'
+    try:            
+        with open(filename, "r") as f:
+            log_data = json.load(f)
+            countLog = log_data['count']
+            
+    except FileNotFoundError:    
+        log_data = {
+            "count": 0        
+        }
+            
+        with open(filename, "w+") as f:
+            json.dump(log_data, f, indent=4)
+            f.seek(0)
+            log_data = json.load(f)
+            countLog = log_data['count']
+    
+    # Check if the highest log file is None
+    if instance is None:
         print(f'GRPC-UPDATE-SERVICE: No log file received, aborting update')
         return
     
-    instance = max_log[1]
+    # Check if the highest log file is from this MOM instance                    
+    if count == countLog:
+        print(f'GRPC-UPDATE-SERVICE: This MOM instance is up to date, aborting update')
+        return
+        
+    if count < countLog:
+        print(f'GRPC-UPDATE-SERVICE: This MOM instance has the highest log file, aborting update')
+        return
+  
     
     print(f'GRPC-UPDATE-SERVICE({instance}): MOM instance with the highest log file')
 
