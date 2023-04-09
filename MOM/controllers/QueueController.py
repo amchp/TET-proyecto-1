@@ -98,7 +98,7 @@ def listQueues():
     user_id = User.attributesToId(username)
 
     try:
-        queues = Queue.queues
+        queues = Queue.queues.values()
         producer_queue = []
         consumer_queue = []
         for q in queues:
