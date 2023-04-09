@@ -1,5 +1,6 @@
 import json
 from models.persistence.DatabaseInterface import Types
+from models.persistence.Log import updateLog 
 from config import BASE_DIR
 from grpcmodule.GRPCClient import replicate
 
@@ -29,5 +30,12 @@ class FileDatabase():
                 indent=4
             ))
             
+            file.close()
+            
+            
+            # Updating log.json file
+            updateLog()
+
             # replicate data to other MOM instances
             replicate(FileDatabase.file_names[type])
+            

@@ -10,6 +10,7 @@ class ReplicationService(Replication_pb2_grpc.ReplicationServiceServicer):
 
 
     def replicate(self, request, context):
+        print(f'GRPC-REPLICATION-SERVICE: Replication request received')
         try:
             request = MessageToDict(request, preserving_proto_field_name=True)
             # Get the filename
@@ -26,6 +27,8 @@ class ReplicationService(Replication_pb2_grpc.ReplicationServiceServicer):
                 f.write(data)
             
         except Exception as e:
+            print(f'GRPC-REPLICATION-SERVICE: {e}')
             return Replication_pb2.ReplicateResponse(is_successful=False, message=str(e))
-            
+        
+        print(f'GRPC-REPLICATION-SERVICE: Replication request completed')
         return Replication_pb2.ReplicateResponse(is_successful=True, message="Data replicated successfully")

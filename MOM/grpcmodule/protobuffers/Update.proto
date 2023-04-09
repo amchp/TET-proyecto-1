@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+service UpdateService {
+    rpc update(Request) returns (UpdateResponse) {}
+    rpc log(Request) returns (LogResponse) {}
+}
+
+message Request {
+}
+
+message UpdateResponse {
+    bool is_successful  = 1;
+    bytes queue_data    = 2;
+    bytes users_data    = 3;
+    bytes topic_data    = 4;
+    bytes log_data      = 5;
+}
+
+message LogResponse {
+    bool is_successful   = 1;
+    bytes data           = 2;
+}
