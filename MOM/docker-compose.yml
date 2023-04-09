@@ -4,7 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./models/persistence
+      - type: bind
+        source: ./models/persistence/files/
+        target: /usr/src/app/models/persistence/files/
     ports:
       - "80:80"
       - "8080:8080"
