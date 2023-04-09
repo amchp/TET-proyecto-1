@@ -98,13 +98,15 @@ def listQueues():
     user_id = User.attributesToId(username)
 
     try:
-        user = User.users[user_id]
-
-        queues = user.queues
-        reply = []
+        queues = Queue.queues
+        producer_queue = []
+        consumer_queue = []
         for q in queues:
-            reply.append({"Queue": q})
-        return json.dumps(reply)
+            if q.creator_id == user_id:
+                producer_queue.append({"Queue": q.id})
+            if q.receptor_id == user_id:
+                consumer_queue.append({"Queue": q.id})
+        return json.dumps({"ProducerOf": producer_queue, "ConsumerOf": consumer_queue})
     except KeyError:
         return {'success': 0,
                 'message': 'User not found'}
