@@ -14,12 +14,12 @@ Manejamos tres objetos MOM Topics, Queue, y User. Cada tópico tiene un ID, nomb
 
 ## Requerimientos de diseño
 
-*La conexión / desconexión, debe ser con usuarios autenticados.
-*Solo puede borrar canales o colas de los usuarios que los crearon
+* La conexión / desconexión, debe ser con usuarios autenticados.
+* Solo puede borrar canales o colas de los usuarios que los crearon
   * Si se borra una cola y no se han terminado de mandar los mensajes no se puede borrar
-*El envío y recepción de mensajes debe identificar los usuarios.
-*Todos estos servicios deben ser expuestos como un API REST hacia los Clientes.
-*El MOM tiene un sistema de replicación leader follower.
-*El MOM tiene varias instancias para que si una instancia falla las otras puedan hacer el trabajo.
-*El MOM se le pueden conectar varias instancias
-*EL MOM es escalable porque utiliza una estrategia de distribución de carga round robin.
+* El envío y recepción de mensajes debe identificar los usuarios.
+* Todos estos servicios deben ser expuestos como un API REST hacia los Clientes.
+* El MOM tiene un sistema de replicación leader follower.
+* El MOM tiene varias instancias para que si una instancia falla las otras puedan hacer el trabajo.
+* El MOM se le pueden conectar varias instancias
+* EL MOM es escalable porque utiliza una estrategia de distribución de carga round robin.
