@@ -5,7 +5,7 @@ from models.User import User
 from models.Queue import Queue
 from controllers.Middleware import has_body, body_req, auth, enable_cors
 
-@post('/Topic/send', apply=(has_body, body_req({'username', 'password', 'topic', 'message'}), auth))
+@post('/Topic/send', apply=(has_body, body_req({'username', 'password', 'topic', 'message'}), auth, enable_cors))
 def sendToTopic():
     Topic.read()
     Queue.read()
@@ -31,7 +31,7 @@ def sendToTopic():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
 
-@post('/Topic/subscribe', apply=(has_body, body_req({'username', 'password', 'topic'}), auth))
+@post('/Topic/subscribe', apply=(has_body, body_req({'username', 'password', 'topic'}), auth, enable_cors))
 def subscribeToTopic():
     Topic.read()
     payload = json.load(request.body)
@@ -55,7 +55,7 @@ def subscribeToTopic():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
 
-@post('/Topic/unsubscribe', apply=(has_body, body_req({'username', 'password', 'topic'}), auth))
+@post('/Topic/unsubscribe', apply=(has_body, body_req({'username', 'password', 'topic'}), auth, enable_cors))
 def unsubscribeFromTopic():
     Topic.read()
     payload = json.load(request.body)

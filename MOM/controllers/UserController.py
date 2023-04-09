@@ -3,10 +3,10 @@ from bottle import get, post, delete, request, response
 from models.Queue import Queue
 from models.User import User
 from models.Topic import Topic
-from controllers.Middleware import has_body, body_req, auth
+from controllers.Middleware import has_body, body_req, auth, enable_cors
 from util.exceptions import DuplicatedUserException
 
-@post('/User/new', apply=(has_body, body_req({'username', 'password'})))
+@post('/User/new', apply=(has_body, body_req({'username', 'password'}), enable_cors))
 def newUser():
     User.read()
     payload = json.load(request.body)
@@ -27,7 +27,7 @@ def newUser():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
 
-@get('/User/list', apply=(has_body, body_req({'username', 'password'}), auth))
+@get('/User/list', apply=(has_body, body_req({'username', 'password'}), auth, enable_cors))
 def listUsers():
     User.read()
 
@@ -43,7 +43,7 @@ def listUsers():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
 
-@delete('/User/delete', apply={has_body, body_req({'username', 'password'}), auth})
+@delete('/User/delete', apply={has_body, body_req({'username', 'password'}), auth, enable_cors})
 def deleteUser():
     User.read()
     Queue.read()

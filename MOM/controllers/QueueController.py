@@ -2,10 +2,10 @@ import json
 from bottle import get, post, delete, request, response
 from models.Queue import Queue
 from models.User import User
-from controllers.Middleware import has_body, body_req, auth
+from controllers.Middleware import has_body, body_req, auth, enable_cors
 from util.exceptions import DuplicatedQueueException
 
-@post('/Queue/send', apply=(has_body, body_req({'username', 'password', 'queue', 'message'}), auth))
+@post('/Queue/send', apply=(has_body, body_req({'username', 'password', 'queue', 'message'}), auth, enable_cors))
 def sendToQueue():
     Queue.read()
     payload = json.load(request.body)
@@ -32,7 +32,7 @@ def sendToQueue():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
 
-@post('/Queue/retrieve', apply=(has_body, body_req({'username', 'password'}), auth))
+@post('/Queue/retrieve', apply=(has_body, body_req({'username', 'password'}), auth, enable_cors))
 def getMessages():
     User.read()
     Queue.read()
@@ -57,7 +57,7 @@ def getMessages():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
 
-@post('/Queue/new', apply=(has_body, body_req({'username', 'password', 'receiver'}), auth))
+@post('/Queue/new', apply=(has_body, body_req({'username', 'password', 'receiver'}), auth, enable_cors))
 def newQueue():
     User.read()
     Queue.read()
@@ -88,7 +88,7 @@ def newQueue():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
 
-@get('/Queue/list', apply=(has_body, body_req({'username', 'password'}), auth))
+@get('/Queue/list', apply=(has_body, body_req({'username', 'password'}), auth, enable_cors))
 def listQueues():
     User.read()
     Queue.read()
@@ -115,7 +115,7 @@ def listQueues():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
     
-@delete('/Queue/delete', apply=(has_body, body_req({'username', 'password', 'queue'}), auth))
+@delete('/Queue/delete', apply=(has_body, body_req({'username', 'password', 'queue'}), auth, enable_cors))
 def deleteQueue():
     User.read()
     Queue.read()
