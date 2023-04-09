@@ -40,6 +40,8 @@ class User:
             messages = []
             for queue_id in self.queues.keys():
                 messages += Queue.queues[queue_id].sendMessages()
+                if Queue.queues[queue_id].creator_id not in User.users:
+                    Queue.queues[queue_id].delete()
             return messages
 
     def delete(self):
