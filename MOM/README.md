@@ -1,6 +1,8 @@
-# Installar docker
+# MOM
 
-## Ir a la carpeta de atras, y corres el dockersetup.sh
+## Installar docker
+
+Ir a la carpeta de atras, y corres el dockersetup.sh
 
 ```
 chmod +x dockersetup.sh
