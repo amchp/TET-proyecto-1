@@ -7,9 +7,9 @@ chmod +x dockersetup.sh
 ./dockersetup.sh
 ```
 
-## Cambiar configuración del MOM
+## Cambiar configuración de nginx
 
-Cambia la configuración del config.py para que tenga las IPS de los otros MOM. Las IPS deberían tener el puerto de gRPC.
+Cambia la configuración del nginx.conf para que en los upstream groups para que las ips de la servers sean correctas.
 
 ## Correr docker
 
