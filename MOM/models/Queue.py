@@ -44,6 +44,8 @@ class Queue:
             return messages
 
     def delete(self):
+        if len(self.messages):
+            raise Exception("Queue isn't empty!")
         with Queue.lock:
             del Queue.queues[self.ID]
             del self
