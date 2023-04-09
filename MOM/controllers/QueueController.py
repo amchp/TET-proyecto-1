@@ -103,9 +103,9 @@ def listQueues():
         consumer_queue = []
         for q in queues:
             if q.creator_id == user_id:
-                producer_queue.append({"Queue": q.id})
+                producer_queue.append({"Queue": q.ID})
             if q.receptor_id == user_id:
-                consumer_queue.append({"Queue": q.id})
+                consumer_queue.append({"Queue": q.ID})
         return json.dumps({"ProducerOf": producer_queue, "ConsumerOf": consumer_queue})
     except KeyError:
         return {'success': 0,
