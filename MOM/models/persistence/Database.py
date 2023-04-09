@@ -2,7 +2,8 @@ import json
 from models.persistence.DatabaseInterface import Types
 from models.persistence.Log import updateLog 
 from config import BASE_DIR
-from grpcmodule.GRPCClient import replicate
+from grpcmodule import GRPCClient
+from threading import Thread
 
 
 class FileDatabase():
@@ -32,10 +33,15 @@ class FileDatabase():
             
             file.close()
             
+            replicateThread = Thread(target=FileDatabase.replicate, args=(type,))
+            replicateThread.start()
             
-            # Updating log.json file
-            updateLog()
+            
+    @staticmethod
+    def replicate(type) -> None:
+        # Updating log.json file
+        updateLog()
 
-            # replicate data to other MOM instances
-            replicate(FileDatabase.file_names[type])
+        # replicate data to other MOM instances
+        GRPCClient.replicate(FileDatabase.file_names[type]) 
             

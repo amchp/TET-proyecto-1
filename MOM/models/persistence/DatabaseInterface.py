@@ -18,3 +18,10 @@ class DatabaseInterface(ABC):
     def write(type: Types, items: dict) -> None:
         # TODO write persistent information to memeory
         pass
+    
+    
+    @staticmethod
+    @abstractmethod
+    def replicate(type: Types) -> None:
+        # TODO replicate data to other MOM instances
+        pass
