@@ -45,18 +45,6 @@ class UpdateService(Update_pb2_grpc.UpdateServiceServicer):
                 data = json.load(f)
                 data = JSONToBytes(data)
                 
-        except FileNotFoundError:
-            
-            data = {
-                "count": 0        
-            }
-            
-            with open(filename, "w+") as f:
-                json.dump(data, f, indent=4)
-                f.seek(0)
-                data = json.load(f)
-                data = JSONToBytes(data)
-            
         except Exception as e:
             print(f'GRPC-UPDATE-SERVICE: {e}')
             return Update_pb2.LogResponse(is_successful=False, data=None)
