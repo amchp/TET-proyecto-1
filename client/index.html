@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <document>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-    <script>
-        function hello(){
-            console.log("A")
-            $.ajax({
-                url: "http://52.23.36.107/Topic/list",
-                method: "GET"
-            }).done(function( data ) {
-                console.log(data);
-            });
-        }
-    </script>
+    <script src="user.js"></script>
+        
     <form>
-        Username: <input type="text">
-        Password: <input type="text">
+        <h2>Signup</h2>
+        Username: <input type="text" id="signup-username">
+        Password: <input type="text" id="signup-password">
+        <button onclick="signup()" type="button">Sign up</button>
+        <p id="signup-text" style="color: red"></p>
     </form>
-    <button onclick="hello()">holi</button>
 </document>
