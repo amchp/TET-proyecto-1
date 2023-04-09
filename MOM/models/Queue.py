@@ -34,10 +34,12 @@ class Queue:
 
     def addMessage(self, message: str) -> None:
         self.messages.append(message)
+        Queue.queues[self.ID] = self
 
     def sendMessages(self) -> list:
         messages = self.messages.copy()
         self.messages.clear()
+        Queue.queues[self.ID] = self
         return messages
 
     def delete(self):
