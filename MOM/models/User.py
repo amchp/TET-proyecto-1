@@ -11,38 +11,41 @@ class User:
     lock = Lock()
 
     def __init__(self, name: str, password: str, id: str = None, queues: dict = None) -> None:
-        if id is None:
-            self.ID = str(uuid.uuid3(uuid.NAMESPACE_OID, name))
-            if self.ID in User.users:
-                raise DuplicatedUserException('User already exist')
-        else:
-            self.ID = id
-        self.name = name
-        # hashlib.sha256(password.encode('ascii')).hexdigest()
-        self.password = password
-        if queues is None:
-            self.queues = {}
-        else:
-            self.queues = queues
-        User.users[self.ID] = self
+        with User.lock:
+            if id is None:
+                self.ID = str(uuid.uuid3(uuid.NAMESPACE_OID, name))
+                if self.ID in User.users:
+                    raise DuplicatedUserException('User already exist')
+            else:
+                self.ID = id
+            self.name = name
+            # hashlib.sha256(password.encode('ascii')).hexdigest()
+            self.password = password
+            if queues is None:
+                self.queues = {}
+            else:
+                self.queues = queues
+            User.users[self.ID] = self
 
     def addQueue(self, queue_id: str) -> None:
-        self.queues[queue_id] = queue_id
-        User.users[self.ID] = self
+        with User.lock:
+            self.queues[queue_id] = queue_id
 
     def deleteQueue(self, queue_id) -> None:
-        del self.queues[queue_id]
+        with User.lock:
+            del self.queues[queue_id]
 
     def getMessages(self):
-        messages = []
-        for queue_id in self.queues.keys():
-            messages += Queue.queues[queue_id].sendMessages()
-        User.users[self.ID] = self
-        return messages
+        with User.lock:
+            messages = []
+            for queue_id in self.queues.keys():
+                messages += Queue.queues[queue_id].sendMessages()
+            return messages
 
     def delete(self):
-        del User.users[self.ID]
-        del self
+        with User.lock:
+            del User.users[self.ID]
+            del self
 
     @staticmethod
     def attributesToId(name: str):
