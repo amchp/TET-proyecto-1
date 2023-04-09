@@ -15,36 +15,38 @@ class Queue:
         messages: list = None,
         id: str = None
     ) -> None:
-        if id is None:
-            self.ID = str(uuid.uuid3(
-                uuid.NAMESPACE_OID,
-                f'{creator_id} {receptor_id}'
-            ))
-            if self.ID in Queue.queues:
-                raise DuplicatedQueueException('Queue already exist')
-        else:
-            self.ID = id
-        self.creator_id = creator_id
-        self.receptor_id = receptor_id
-        if messages is None:
-            self.messages = []
-        else:
-            self.messages = messages
-        Queue.queues[self.ID] = self
+        with Queue.lock:
+            if id is None:
+                self.ID = str(uuid.uuid3(
+                    uuid.NAMESPACE_OID,
+                    f'{creator_id} {receptor_id}'
+                ))
+                if self.ID in Queue.queues:
+                    raise DuplicatedQueueException('Queue already exist')
+            else:
+                self.ID = id
+            self.creator_id = creator_id
+            self.receptor_id = receptor_id
+            if messages is None:
+                self.messages = []
+            else:
+                self.messages = messages
+            Queue.queues[self.ID] = self
 
     def addMessage(self, message: str) -> None:
-        self.messages.append(message)
-        Queue.queues[self.ID] = self
+        with Queue.lock:
+            self.messages.append(message)
 
     def sendMessages(self) -> list:
-        messages = self.messages.copy()
-        self.messages.clear()
-        Queue.queues[self.ID] = self
-        return messages
+        with Queue.lock:
+            messages = self.messages.copy()
+            self.messages.clear()
+            return messages
 
     def delete(self):
-        del Queue.queues[self.ID]
-        del self
+        with Queue.lock:
+            del Queue.queues[self.ID]
+            del self
 
     @staticmethod
     def attributesToId(creator_id: str, receptor_id: str,):
