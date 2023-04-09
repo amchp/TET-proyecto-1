@@ -45,10 +45,9 @@ class Topic:
             del self.queues[queue_id]
 
     def createQueuesForSubscribers(self, creator_id):
-        with Topic.lock:
-            for receptor_id in self.subscribers.keys():
-                queue = Queue.findOrCreate(creator_id, receptor_id)
-                self.addQueue(queue.ID)
+        for receptor_id in self.subscribers.keys():
+            queue = Queue.findOrCreate(creator_id, receptor_id)
+            self.addQueue(queue.ID)
 
     def addMessage(self, creator_id, message):
         with Topic.lock:
