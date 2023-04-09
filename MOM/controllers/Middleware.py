@@ -42,3 +42,9 @@ def auth(f):
         return {'success': 0,
             'message': 'User not found'}
     return inner
+
+def enable_cors(f):
+    def inner(*args, **kwargs):
+        response.set_header('Access-Control-Allow-Origin', '*')
+        return f(*args, **kwargs)
+    return inner

@@ -3,7 +3,7 @@ from bottle import get, post, request, response
 from models.Topic import Topic
 from models.User import User
 from models.Queue import Queue
-from controllers.Middleware import has_body, body_req, auth
+from controllers.Middleware import has_body, body_req, auth, enable_cors
 
 @post('/Topic/send', apply=(has_body, body_req({'username', 'password', 'topic', 'message'}), auth))
 def sendToTopic():
@@ -79,7 +79,7 @@ def unsubscribeFromTopic():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
 
-@get('/Topic/list')
+@get('/Topic/list', apply=(enable_cors))
 def listTopics():
     Topic.read()
 
