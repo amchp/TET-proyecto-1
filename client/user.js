@@ -1,5 +1,3 @@
-let domain = "http://52.23.36.107"
-
 function signup() {
     username = $("#signup-username").val()
     password = $("#signup-password").val()
@@ -35,8 +33,8 @@ function listUsers() {
 }
 
 function deleteUser(){
-    username = $("#signup-username").val()
-    password = $("#signup-password").val()
+    username = $("#user-username").val()
+    password = $("#user-password").val()
     fetch(domain + "/User/delete", {
         method: "DELETE",
         mode: "cors",
