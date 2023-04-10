@@ -9,6 +9,7 @@ from controllers.Middleware import has_body, body_req, auth, enable_cors
 def sendToTopic():
     Topic.read()
     Queue.read()
+    User.read()
     payload = json.load(request.body)
     username = payload['username']
     topic_name = payload['topic']
@@ -20,7 +21,9 @@ def sendToTopic():
         topic = Topic.topics[topic_id]
 
         topic.addMessage(user_id, message)
+        Topic.write()
         Queue.write()
+        User.write()
         return {'success': 1,
                 'message': 'successfully added message to Topic'}
     except KeyError:
