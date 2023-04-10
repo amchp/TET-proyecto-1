@@ -114,7 +114,7 @@ def listQueues():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
     
-@delete('/Queue/delete', apply=(has_body, body_req({'username', 'password', 'queue'}), auth, enable_cors))
+@post('/Queue/delete', apply=(has_body, body_req({'username', 'password', 'queue'}), auth, enable_cors))
 def deleteQueue():
     User.read()
     Queue.read()

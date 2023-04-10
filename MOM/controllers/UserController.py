@@ -43,7 +43,7 @@ def listUsers():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
 
-@delete('/User/delete', apply={has_body, body_req({'username', 'password'}), auth, enable_cors})
+@post('/User/delete', apply={has_body, body_req({'username', 'password'}), auth, enable_cors})
 def deleteUser():
     User.read()
     Topic.read()

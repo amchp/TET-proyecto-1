@@ -29,6 +29,12 @@
         "password": "123",
         "queues": {}
     },
+    "1318177c-1053-3629-81f0-6af7958f3a74": {
+        "ID": "1318177c-1053-3629-81f0-6af7958f3a74",
+        "name": "augustus tercerus",
+        "password": "123",
+        "queues": {}
+    },
     "20ce2284-0d14-3e0c-ac0c-c0a2eee7c69c": {
         "ID": "20ce2284-0d14-3e0c-ac0c-c0a2eee7c69c",
         "name": "ANUELAAAAAAAAPetro",
@@ -269,6 +275,12 @@
         "ID": "99bb2eb8-2098-3f6d-9984-6675cc4383d2",
         "name": "ASD ASDFASDFASFASF AREPA",
         "password": "VAMOSPUERTORICO",
+        "queues": {}
+    },
+    "9b82e664-b225-3920-9935-9c60a12030c7": {
+        "ID": "9b82e664-b225-3920-9935-9c60a12030c7",
+        "name": "jdbuenol",
+        "password": "123",
         "queues": {}
     },
     "9ee9f629-67a9-3f4f-85ac-38f52685e9f8": {
