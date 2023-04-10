@@ -2,12 +2,45 @@
 <document>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="user.js"></script>
-        
+    <script src="topic.js"></script>
     <form>
         <h2>Signup</h2>
         Username: <input type="text" id="signup-username">
         Password: <input type="text" id="signup-password">
+        <br>
         <button onclick="signup()" type="button">Sign up</button>
         <p id="signup-text" style="color: red"></p>
+    </form>
+    <hr>
+    <form>
+        <h2>User</h2>
+        <select id="user-route">
+            <option value="" selected disabled hidden>Choose Method</option>
+            <option value="delete">Delete Users</option>
+            <option value="list">List Users</option>
+        </select>
+        Username: <input type="text" id="user-username">
+        Password: <input type="text" id="user-password">
+        <br>
+        <button onclick="usermethods()" type="button">Submit</button>
+        <p id="user-text" style="color: red"></p>
+    </form>
+    <hr>
+    <form>
+        <h2>Topic</h2>
+        <select id="topic-route" onchange="topicChange()">
+            <option value="" selected disabled hidden>Choose Method</option>
+            <option value="send">Send Message to Topic</option>
+            <option value="subscribe">Subscribe to Topic</option>
+            <option value="unsubscribe">Unsubscribe from Topic</option>
+            <option value="list">List Topics</option>
+        </select>
+        <span id="topic-u" style="display: none">Username: <input type="text" id="topic-username"></span>
+        <span id="topic-p" style="display: none">Password: <input type="text" id="topic-password"></span>
+        <span id="topic-t" style="display: none">Topic: <input type="text" id="topic-topic"></span>
+        <span id="topic-m" style="display: none">Message: <input type="text" id="topic-message"></span>
+        <br>
+        <button onclick="topicmethods()" type="button">Submit</button>
+        <p id="topic-text" style="color: red"></p>
     </form>
 </document>
