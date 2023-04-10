@@ -1,0 +1,1 @@
+let domain = "http://mom.telematica.tech"
