@@ -2,8 +2,16 @@
     "3506b99e-3a42-37ff-abf6-eb44410468aa": {
         "ID": "3506b99e-3a42-37ff-abf6-eb44410468aa",
         "creator_id": "9b82e664-b225-3920-9935-9c60a12030c7",
-        "messages": [],
+        "messages": [
+            "Hola adolfito, buenos dias de nuevo"
+        ],
         "receptor_id": "cb31b866-f484-3e19-892b-45e36f5fc90f"
+    },
+    "468e3d31-367b-3170-a4b6-6e469e87b63e": {
+        "ID": "468e3d31-367b-3170-a4b6-6e469e87b63e",
+        "creator_id": "f1ff5e1e-dcbe-39b5-b31e-a0cc72e3f238",
+        "messages": [],
+        "receptor_id": "9b82e664-b225-3920-9935-9c60a12030c7"
     },
     "4e771ff8-5af5-3219-8c19-83ef9e0c0849": {
         "ID": "4e771ff8-5af5-3219-8c19-83ef9e0c0849",

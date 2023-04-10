@@ -3,7 +3,7 @@ from bottle import get, post, delete, request, response
 from models.Queue import Queue
 from models.User import User
 from controllers.Middleware import has_body, body_req, auth, auth_query, enable_cors
-from util.exceptions import DuplicatedQueueException
+from util.exceptions import DuplicatedQueueException, QueueIsNotEmptyException
 
 @post('/Queue/send', apply=(has_body, body_req({'username', 'password', 'queue', 'message'}), auth, enable_cors))
 def sendToQueue():
@@ -140,7 +140,11 @@ def deleteQueue():
     except KeyError:
         return {'success': 0,
                 'message': 'Queue not found'}
+    except QueueIsNotEmptyException:
+        return {'success': 0,
+                'message': 'Queue isn''t empty!'}
     except:
         response.status = 500
         return {'success': 0,
                 'message': 'Something unexpected happened'}
+

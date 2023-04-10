@@ -275,7 +275,9 @@
         "ID": "9b82e664-b225-3920-9935-9c60a12030c7",
         "name": "jdbuenol",
         "password": "123",
-        "queues": {}
+        "queues": {
+            "468e3d31-367b-3170-a4b6-6e469e87b63e": "468e3d31-367b-3170-a4b6-6e469e87b63e"
+        }
     },
     "9ee9f629-67a9-3f4f-85ac-38f52685e9f8": {
         "ID": "9ee9f629-67a9-3f4f-85ac-38f52685e9f8",
@@ -472,6 +474,12 @@
         "ID": "f1beb652-3772-320f-9b8b-de8a9405ac0b",
         "name": "ASD SDFSDFDSFDSFFS AREPA",
         "password": "VAMOSPUERTORICO",
+        "queues": {}
+    },
+    "f1ff5e1e-dcbe-39b5-b31e-a0cc72e3f238": {
+        "ID": "f1ff5e1e-dcbe-39b5-b31e-a0cc72e3f238",
+        "name": "juliancito",
+        "password": "123",
         "queues": {}
     },
     "fafd92e8-0fa6-3268-bfb5-a0ea616c2b57": {

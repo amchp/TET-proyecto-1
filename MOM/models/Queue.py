@@ -1,7 +1,7 @@
 import uuid
 from models.persistence.Database import FileDatabase
 from models.persistence.DatabaseInterface import Types
-from util.exceptions import DuplicatedQueueException
+from util.exceptions import DuplicatedQueueException, QueueIsNotEmptyException
 from threading import Lock
 
 class Queue:
@@ -45,7 +45,7 @@ class Queue:
 
     def delete(self):
         if len(self.messages):
-            raise Exception("Queue isn't empty!")
+            raise QueueIsNotEmptyException("Queue isn't empty!")
         with Queue.lock:
             del Queue.queues[self.ID]
             del self
