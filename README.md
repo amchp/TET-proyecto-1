@@ -14,8 +14,9 @@ A lo largo de este documento, presentaremos la arquitectura del sistema distribu
 
 # 2. Arquitectura del MOM
 
+
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/28406146/230799407-4033c08b-fac8-4120-8366-0238cfd036ed.png">
+  <img src="https://user-images.githubusercontent.com/69641274/230806409-4b7e2218-e6ac-441b-a306-e0829fa06275.jpg">
 </p>
 
 El sistema distribuido desarrollado es un Message-Oriented Middleware (MOM) construido desde cero utilizando Python 3.8.10. Este middleware permite la comunicación entre diferentes aplicaciones mediante el intercambio de mensajes.
