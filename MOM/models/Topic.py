@@ -1,5 +1,6 @@
 import uuid
 from models.Queue import Queue
+from models.User import User
 from models.persistence.DatabaseInterface import Types
 from models.persistence.Database import FileDatabase
 from threading import Lock
@@ -55,6 +56,11 @@ class Topic:
             for queue_id in self.queues.keys():
                 Queue.queues[queue_id].addMessage(message)
 
+    def getSubscribers(self):
+        subscribers = []
+        for subscriber in self.subscribers.keys():
+            subscribers.append(User.idToName(subscriber))
+        return subscribers
 
     def addSubscriber(self, user_id: str) -> None:
         with Topic.lock:

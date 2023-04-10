@@ -45,8 +45,8 @@ def getMessages():
 
         messages = user.getMessages()
         reply = []
-        for m in messages:
-            reply.append({'message': m})
+        for m, creator in messages:
+            reply.append({'message': m, 'sender': creator})
         Queue.write()
         return json.dumps(reply)
     except KeyError:
@@ -102,9 +102,9 @@ def listQueues():
         consumer_queue = []
         for q in queues:
             if q.creator_id == user_id:
-                producer_queue.append({"Queue": q.ID})
+                producer_queue.append({"Queue": q.ID, "Receptor": User.idToName(q.receptor_id)})
             if q.receptor_id == user_id:
-                consumer_queue.append({"Queue": q.ID})
+                consumer_queue.append({"Queue": q.ID, "Sender": User.idToName(q.creator_id)})
         return json.dumps({"ProducerOf": producer_queue, "ConsumerOf": consumer_queue})
     except KeyError:
         return {'success': 0,
