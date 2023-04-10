@@ -56,21 +56,18 @@ En nuestro sistema gestionamos tres objetos principales: Topics, Queue y User.
 
 La implementación del MOM propuesto cuenta con las siguientes características y requisitos, diseñados para garantizar un funcionamiento eficiente y seguro:
 
-* La conexión y desconexión al sistema requieren la autenticación de los usuarios, lo que garantiza que solo los usuarios autorizados puedan acceder a los servicios.
-
-* Los usuarios solo pueden eliminar canales o colas que hayan creado. Al eliminar una cola, si aún quedan mensajes pendientes de envío, no se podrá realizar la eliminación hasta que todos los mensajes hayan sido procesados.
-
-* El envío y recepción de mensajes dentro del sistema identifica a los usuarios involucrados, lo que permite un mejor seguimiento y control de las comunicaciones.
-
-* Todos los servicios mencionados se exponen a través de una API REST para facilitar la interacción con los clientes.
-
-* El MOM implementa un sistema de replicación de tipo líder-seguidor (leader-follower), lo que permite una distribución eficiente de las tareas y garantiza la coherencia de los datos entre las diferentes instancias.
-
-* El sistema cuenta con múltiples instancias del MOM, lo que proporciona tolerancia a fallos. En caso de que una instancia falle, las otras pueden continuar ejecutando el trabajo sin interrupciones.
-
-* El MOM permite conectar múltiples instancias, lo que aumenta su capacidad para manejar cargas de trabajo más elevadas y crecer en función de las demandas del sistema.
-
-* La escalabilidad del MOM se logra mediante la utilización de una estrategia de distribución de carga Round Robin, que distribuye las solicitudes entrantes de manera equitativa entre las instancias disponibles.
+| Requerimientos  |
+| ------------- |
+| La conexión y desconexión al sistema requieren la autenticación de los usuarios, lo que garantiza que solo los usuarios autorizados puedan acceder a los servicios.  |
+| Los usuarios solo pueden eliminar canales o colas que hayan creado. Al eliminar una cola, si aún quedan mensajes pendientes de envío, no se podrá realizar la eliminación hasta que todos los mensajes hayan sido procesados.  |
+| El envío y recepción de mensajes dentro del sistema identifica a los usuarios involucrados, lo que permite un mejor seguimiento y control de las comunicaciones.  |
+| Todos los servicios mencionados se exponen a través de una API REST para facilitar la interacción con los clientes.  |
+| El MOM implementa un sistema de replicación de tipo líder-seguidor (leader-follower), lo que permite una distribución eficiente de las tareas y garantiza la coherencia de los datos entre las diferentes instancias.  |
+| El sistema cuenta con múltiples instancias del MOM, lo que proporciona tolerancia a fallos. En caso de que una instancia falle, las otras pueden continuar ejecutando el trabajo sin interrupciones.  |
+| El MOM permite conectar múltiples instancias, lo que aumenta su capacidad para manejar cargas de trabajo más elevadas y crecer en función de las demandas del sistema.  |
+| La escalabilidad del MOM se logra mediante la utilización de una estrategia de distribución de carga Round Robin, que distribuye las solicitudes entrantes de manera equitativa entre las instancias disponibles.  |
+| En caso de que una instancia de MOM falle y se desconecte, se ha implementado un sistema de actualización llamado Update para garantizar la consistencia de los datos entre las instancias. Este sistema funciona de la siguiente manera:  |
+| En caso de que una instancia de MOM falle y se desconecte, se ha implementado un sistema de actualización llamado Update para garantizar la consistencia de los datos entre las instancias. Este sistema funciona de la siguiente manera:<br><br> • Cuando un MOM se inicia, solicita los archivos log.json de todas las demás instancias activas en la red.<br><br>• El MOM compara los archivos recibidos y selecciona aquel con el registro (log) más extenso, ya que será el más actualizado.<br><br>• A continuación, el MOM compara su propio archivo log.json con el del registro más actualizado. Si ambos archivos son iguales, no será necesario realizar ninguna actualización, ya que la instancia está al día con la información más reciente.<br><br>• Si el registro local es menor que el más actualizado, el MOM tomará todos los archivos JSON de la instancia con la información más reciente. Estos archivos se recibirán a través de gRPC.<br><br>• Una vez recibida la información actualizada, el MOM sobrescribirá sus propios archivos y, posteriormente, iniciará su servidor REST.<br><br> Es importante mencionar que el servidor gRPC se inicia simultáneamente con el sistema de actualización (Update) en hilos separados. Esto se debe a que, durante el proceso de actualización, es posible que se reciban actualizaciones adicionales por replicación, las cuales deben ser gestionadas adecuadamente. De esta manera, el sistema de actualización garantiza la coherencia y consistencia de los datos entre las distintas instancias de MOM, incluso en situaciones en las que una o más instancias fallen o se desconecten temporalmente. |
 
 # 5. Ejecución del sistema
 
