@@ -271,14 +271,6 @@
         "password": "VAMOSPUERTORICO",
         "queues": {}
     },
-    "9b82e664-b225-3920-9935-9c60a12030c7": {
-        "ID": "9b82e664-b225-3920-9935-9c60a12030c7",
-        "name": "jdbuenol",
-        "password": "123",
-        "queues": {
-            "468e3d31-367b-3170-a4b6-6e469e87b63e": "468e3d31-367b-3170-a4b6-6e469e87b63e"
-        }
-    },
     "9ee9f629-67a9-3f4f-85ac-38f52685e9f8": {
         "ID": "9ee9f629-67a9-3f4f-85ac-38f52685e9f8",
         "name": "ADADDWDQWDADBA",

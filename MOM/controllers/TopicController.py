@@ -89,7 +89,7 @@ def listTopics():
 
         reply = []
         for topic in topics:
-          reply.append({'topicName': topic.name})
+            reply.append({'topicName': topic.name, 'subscribers': topic.getSubscribers()})
         return json.dumps(reply)
     except:
         response.status = 500

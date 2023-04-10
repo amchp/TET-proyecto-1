@@ -39,7 +39,7 @@ class User:
         with User.lock:
             messages = []
             for queue_id in self.queues.keys():
-                messages += Queue.queues[queue_id].sendMessages()
+                messages.append((Queue.queues[queue_id].sendMessages(), User.idToName(Queue.queues[queue_id].creator_id)))
                 if Queue.queues[queue_id].creator_id not in User.users:
                     Queue.queues[queue_id].delete()
             return messages
@@ -52,6 +52,10 @@ class User:
     @staticmethod
     def attributesToId(name: str):
         return str(uuid.uuid3(uuid.NAMESPACE_OID, name))
+    
+    @staticmethod
+    def idToName(id: str):
+        return User.users[id].name if id in User.users else None
 
     @staticmethod
     def list():
