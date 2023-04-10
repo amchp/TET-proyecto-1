@@ -1,4 +1,4 @@
-# Tópicos Especiales en Telemática | Proyecto 1  B| MOM
+# Tópicos Especiales en Telemática | Proyecto 1 | MOM
 
 ## Integrantes
 
@@ -71,3 +71,92 @@ La implementación del MOM propuesto cuenta con las siguientes características 
 * El MOM permite conectar múltiples instancias, lo que aumenta su capacidad para manejar cargas de trabajo más elevadas y crecer en función de las demandas del sistema.
 
 * La escalabilidad del MOM se logra mediante la utilización de una estrategia de distribución de carga Round Robin, que distribuye las solicitudes entrantes de manera equitativa entre las instancias disponibles.
+
+# 5. Ejecución del sistema
+
+A continuación, se detalla el proceso de instalación del sistema, incluyendo los prerrequisitos y la configuración del servidor NGINX y las instancias de MOM.
+
+## Prerrequisitos
+
+1. Crear una máquina virtual en AWS EC2 y abrir los puertos 80 y 8080 (8080, en caso de que sea una máquina para una instancia MOM) para una para permitir conexiones entrantes desde cualquier dirección IP.
+
+2. Es recomendable asignar una dirección IP elástica a la máquina virtual, lo que evitará la necesidad de reconfigurar las direcciones IP cada vez que la máquina se reinicie.
+
+3. Conéctate a la máquina virtual mediante SSH.
+
+4. Clona el repositorio del proyecto ejecutando el siguiente comando:
+
+```sh
+git clone https://github.com/amchp/TET-proyecto-1.git
+```
+
+5. Navega al directorio del proyecto:
+
+```sh
+cd TET-proyecto-1
+```
+
+6. Instala Docker utilizando el archivo dockersetup.sh proporcionado en el repositorio:
+
+```sh
+sh dockersetup.sh
+```
+
+Con Docker instalado, ahora puedes configurar el servidor NGINX y las instancias de MOM.
+
+## Configuración del servidor NGINX
+
+1. Navega al directorio del balanceador de carga:
+
+```sh
+cd loadBalancer
+```
+
+2. Edita el archivo nginx.conf para agregar las direcciones IP públicas de las máquinas en las que se ejecutarán las instancias de MOM. Utilizar direcciones IP elásticas es recomendable para evitar reconfiguraciones constantes.
+
+3. Ejecuta el siguiente comando para iniciar el contenedor de Docker:
+
+```sh
+docker-compose up
+```
+
+4. Si encuentras problemas relacionados con permisos, ejecuta el comando sudo su para obtener privilegios de superusuario y vuelve a intentar ejecutar docker-compose up.
+
+Una vez completados estos pasos, tu balanceador de carga NGINX estará listo para operar, y podrás comenzar a utilizar el sistema MOM con sus funcionalidades completas.
+
+## Configuración de la instancia MOM
+
+1. Navega al directorio del MOM:
+
+```sh
+cd MOM
+```
+
+2. Edita el archivo config.py para agregar las direcciones IP de las demás instancias de MOM:
+
+```python
+import os
+BASE_DIR = os.getcwd()
+MOM_INSTANCES = ["54.146.228.238:8080", "34.236.17.72:8080"]
+SERVER_ADDRESS = "0.0.0.0"
+REST_SERVER_PORT = 80
+GRPC_SERVER_PORT = 8080
+GRPC_TIMEOUT = 2
+```
+
+La línea de interés es la que declara las instancias de otros MOM:
+
+```python
+MOM_INSTANCES = ["54.146.228.238:8080", "34.236.17.72:8080"]
+```
+
+Debes editar este arreglo agregando las direcciones IP públicas (o elásticas) de los demás MOM. No incluyas la dirección IP de la misma máquina. Asegúrate de que las direcciones IP estén acompañadas por ":8080", ya que las conexiones al servidor gRPC utilizan este puerto.
+
+3. Una vez editado el archivo, guarda los cambios y ejecuta los siguientes comandos para construir e iniciar el contenedor de Docker:
+
+```sh
+docker-compose build
+docker-compose up
+```
+
+Con estos pasos completados, tu instancia de MOM estará en funcionamiento y lista para procesar mensajes en el sistema. Ahora puedes aprovechar todas las funcionalidades que ofrece el Message-Oriented Middleware.
