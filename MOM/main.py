@@ -1,5 +1,6 @@
 from controllers import UserController, TopicController, QueueController
-from bottle import run
+from bottle import app, run
+from bottle_cors_plugin import cors_plugin
 from grpcmodule.GRPCServer import serveGRPC
 from grpcmodule.GRPCClient import update
 from config import SERVER_ADDRESS, REST_SERVER_PORT
@@ -15,6 +16,8 @@ def runGRPCServer():
     
 
 def runRESTServer():
+    server = app()
+    server.install(cors_plugin('*'))
     run(host=SERVER_ADDRESS, port=REST_SERVER_PORT)
 
 

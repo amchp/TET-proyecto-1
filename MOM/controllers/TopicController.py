@@ -57,6 +57,7 @@ def subscribeToTopic():
 
 @post('/Topic/unsubscribe', apply=(has_body, body_req({'username', 'password', 'topic'}), auth, enable_cors))
 def unsubscribeFromTopic():
+    response.set_header('Access-Control-Allow-Origin', '*')
     Topic.read()
     payload = json.load(request.body)
     username = payload['username']

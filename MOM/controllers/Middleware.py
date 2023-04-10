@@ -43,8 +43,27 @@ def auth(f):
             'message': 'User not found'}
     return inner
 
+def auth_query(f):
+    def inner(*args, **kwargs):
+        User.read()
+        username = request.query['username']
+        password = request.query['password']
+        for user in User.list():
+            if user.name == username:
+                if user.password == password:
+                    return f(*args, **kwargs)
+                response.status = 401
+                return {'error': 'Unauthorized',
+                        'error_message': 'Wrong credentials'}
+        response.status = 401
+        return {'success': 0,
+                'message': 'User not found'}
+    return inner
+
 def enable_cors(f):
     def inner(*args, **kwargs):
         response.set_header('Access-Control-Allow-Origin', '*')
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, DELETE'
+        response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
         return f(*args, **kwargs)
     return inner

@@ -2,7 +2,7 @@ import json
 from bottle import get, post, delete, request, response
 from models.Queue import Queue
 from models.User import User
-from controllers.Middleware import has_body, body_req, auth, enable_cors
+from controllers.Middleware import has_body, body_req, auth, auth_query, enable_cors
 from util.exceptions import DuplicatedQueueException
 
 @post('/Queue/send', apply=(has_body, body_req({'username', 'password', 'queue', 'message'}), auth, enable_cors))
@@ -88,12 +88,11 @@ def newQueue():
         return {'success': 0,
                 'message': 'Something unexpected happened'}
 
-@get('/Queue/list', apply=(has_body, body_req({'username', 'password'}), auth, enable_cors))
+@get('/Queue/list', apply=(auth_query, enable_cors))
 def listQueues():
     User.read()
     Queue.read()
-    payload = json.load(request.body)
-    username = payload['username']
+    username = request.query['username']
 
     user_id = User.attributesToId(username)
 

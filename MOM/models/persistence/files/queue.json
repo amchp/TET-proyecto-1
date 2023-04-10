@@ -1,4 +1,10 @@
 {
+    "3506b99e-3a42-37ff-abf6-eb44410468aa": {
+        "ID": "3506b99e-3a42-37ff-abf6-eb44410468aa",
+        "creator_id": "9b82e664-b225-3920-9935-9c60a12030c7",
+        "messages": [],
+        "receptor_id": "cb31b866-f484-3e19-892b-45e36f5fc90f"
+    },
     "4e771ff8-5af5-3219-8c19-83ef9e0c0849": {
         "ID": "4e771ff8-5af5-3219-8c19-83ef9e0c0849",
         "creator_id": "c272a8bd-ce0b-38f1-98a6-3c1347c7b95d",
@@ -23,7 +29,8 @@
             "HI",
             "BYE",
             "HI AGAIN",
-            "HI AGAIN2"
+            "HI AGAIN2",
+            "Hola papagallo"
         ],
         "receptor_id": "46d647c1-1484-3165-8936-9ead0d9f8bcf"
     }
