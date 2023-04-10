@@ -62,7 +62,10 @@ class Topic:
 
     def deleteSubscriber(self, user_id: str):
         with Topic.lock:
-            del self.subscribers[user_id]
+            try:
+                del self.subscribers[user_id]
+            except KeyError:
+                pass
 
     def delete(self):
         with Topic.lock:
