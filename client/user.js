@@ -12,49 +12,50 @@ function signup() {
             "Content-Type": "application/json"
         }
     }).then((res) => {
-        return res;
-    }).then((data) => {
-        $("#signup-text").html(data)
-    });
-}
-function hello(){
-    console.log("A")
-    fetch(domain + "/Topic/unsubscribe", {
-        method: "POST",
-        mode: "cors",
-        redirect: "follow",
-        body: JSON.stringify({"username": "jdbuenol", "password": "123", "topic": "Beach"}),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then((res) => {
         res.json().then((data) => {
             console.log(data);
+            $("#signup-text").text(JSON.stringify(data))
         });
     });
 }
 
-function hello2(){
-    console.log("B")
-
-    fetch(domain + "/Topic/list", {
+function listUsers() {
+    username = $("#user-username").val()
+    password = $("#user-password").val()
+    fetch(domain + "/User/list?username=" + username + "&password=" + password, {
         method: "GET",
         mode: "cors",
         redirect: "follow"
     }).then((res) => {
         res.json().then((data) => {
             console.log(data);
+            $("#user-text").text(JSON.stringify(data))
+        });
+    })
+}
+
+function deleteUser(){
+    username = $("#signup-username").val()
+    password = $("#signup-password").val()
+    fetch(domain + "/User/delete", {
+        method: "DELETE",
+        mode: "cors",
+        redirect: "follow",
+        body: JSON.stringify({"username": username, "password": password}),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then((res) => {
+        res.json().then((data) => {
+            console.log(data);
+            $("#user-text").text(JSON.stringify(data))
         });
     });
 }
 
-function hello3(){
-    console.log("C")
-    $.ajax({
-        url: domain + "/Queue/list",
-        method: "Get",
-        data: {"username": "jdbuenol", "password": "123"}
-    }).done(function( data ) {
-        console.log(data);
-    });
+function usermethods() {
+    choice = $("#user-route").val()
+    if(choice == "list") listUsers();
+    else if(choice == "delete") deleteUser();
+    else $("#user-text").text("Please choose one method")
 }
