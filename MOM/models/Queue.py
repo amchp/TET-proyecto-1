@@ -69,7 +69,8 @@ class Queue:
         ))
         if id in Queue.queues:
             return Queue.queues[id]
-        return Queue(creator_id, receptor_id)
+        Queue(creator_id, receptor_id)
+        return Queue.queues[id]
 
     @staticmethod
     def find(creator_id: str, receptor_id: str,):

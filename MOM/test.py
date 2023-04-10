@@ -44,3 +44,7 @@ topic.addQueue(queue1.ID)
 Topic.write()
 Topic.read()
 # print(Topic.topics)
+
+topic = Topic('Beach')
+topic.addSubscriber(user2.ID)
+topic.addMessage(user1.ID, "Hola")
