@@ -26,7 +26,8 @@ def sendToTopic():
     except KeyError:
         return {'success': 0,
                 'message': 'Topic not found'}
-    except:
+    except Exception as e:
+        print(e)
         response.status = 500
         return {'success': 0,
                 'message': 'Something unexpected happened'}

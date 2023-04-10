@@ -163,6 +163,12 @@
         "password": "musolini",
         "queues": {}
     },
+    "4c515653-eaac-3446-8dcf-df2af8a86a77": {
+        "ID": "4c515653-eaac-3446-8dcf-df2af8a86a77",
+        "name": "juan carlos",
+        "password": "123",
+        "queues": {}
+    },
     "51f017c3-b49a-347b-9774-5f4f21649bb1": {
         "ID": "51f017c3-b49a-347b-9774-5f4f21649bb1",
         "name": "ASD ADSFASDFASFASDF AREPA",
@@ -292,6 +298,12 @@
     "a233e8aa-73e8-391b-a7bd-c96012c178a7": {
         "ID": "a233e8aa-73e8-391b-a7bd-c96012c178a7",
         "name": "MasasddIasdMIMsdsdassssIM",
+        "password": "123",
+        "queues": {}
+    },
+    "a2fa0025-d2b1-3635-a997-0997db30d757": {
+        "ID": "a2fa0025-d2b1-3635-a997-0997db30d757",
+        "name": "Alfredo augustus",
         "password": "123",
         "queues": {}
     },
@@ -454,6 +466,12 @@
         "ID": "dd99e051-eee2-3268-8b9f-9cba73987ac4",
         "name": "HOLAGENTE DE YOUTUBE",
         "password": "VAMOSPUERTORICO",
+        "queues": {}
+    },
+    "e450242a-0db5-38e5-9bce-b53361e8654b": {
+        "ID": "e450242a-0db5-38e5-9bce-b53361e8654b",
+        "name": "agustavito",
+        "password": "123",
         "queues": {}
     },
     "ead9fa47-afb7-33b4-a9b3-ce79ab322b08": {
